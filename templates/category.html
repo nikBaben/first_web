@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+    Статьи в категории "{{ category.name }}" | {{ super() }}
+{% endblock %}
+{% block header %}
+    Статьи в категории "{{ category.name }}"
+{% endblock %}
+{% block body%}
+    {% for article in category.articles %}
+        <div class="row">
+       <div class="border-danger row row-cols-5 row-cols-md-5 mb-5 text-left">
+        <div class="col">
+        <div class="card border-danger mb-2">
+      <div class="card-header">
+          <img src="{{ article.img }}" class="card-img-top" alt="...">
+        <h4 class="my-0 fw-normal">{{ article.title }}</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{ article.price }}руб~</h1>
+        <ul class="list-unstyled mt-6 mb-6">
+          <li>Адрес: {{ article.address}}</li>
+          <li>пользователь:
+              {{ article.author_id}}
+          </li>
+        </ul>
+        <a type="button" class="btn btn-danger" href="/index/{{ article.id }}">Sign up for free</a>
+      </div>
+    </div>
+    </div>
+    </div>
+        </div>
+    {% else %}
+        Статей нет...
+    {% endfor %}
+{% endblock %}
