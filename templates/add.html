@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+    Добавление статьи
+{% endblock %}
+{% block body %}
+    {% if form.errors %}
+        <ul class="errors">
+            {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                {% for error in field_errors %}
+                    <li>{{ form[field_name].label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form class="bg-white rounded-2 p-4 shadow-sm" action="{{ url_for('create_article') }}" method="POST">
+        {{ form.csrf_token }}
+        <div class="mb-3">
+            <label class="form-label">{{ form.title.label }}</label>
+            {{ form.title(class_="form-control") }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{ form.body.label }}</label>
+            {{ form.body(class_="form-control") }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{ form.price.label }}</label>
+            {{ form.price(class_="form-control") }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{ form.address.label }}</label>
+            {{ form.address(class_="form-control") }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{ form.img.label }}</label>
+            {{ form.img(class_="form-control") }}
+        </div>
+          <div class="mb-3">
+            <label class="form-label">{{ form.category_id.label }}</label>
+            {{ form.category_id(class_="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-danger">Создать</button>
+    </form>
+{% endblock %}
