@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,abort
 from models import db, Post, Goga,Category, Otziv
 from flask_migrate import Migrate
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
@@ -24,7 +24,7 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    return render_template("index.html", articles=Post.query.all())
+    return render_template("index.html", articles=Post.query.order_by(Post.created_at).all())
 
 
 
@@ -83,6 +83,7 @@ def terms():
 
 
 @app.route('/index/<int:id>')
+@login_required
 def post(id):
     item = Post.query.get(id)
     lol = Otziv.query.all()
@@ -96,6 +97,9 @@ def register():
         email = register_form.email.data
         name = register_form.name.data
         password = register_form.password.data
+        existing_user = Goga.query.filter_by(email=email).first()
+        if existing_user:
+            abort(400)
         user = Goga(name=name, email=email)
         user.set_password(password)
         db.session.add(user)
@@ -123,6 +127,21 @@ def search():
 def category_articles(category_id):
     category = Category.query.get_or_404(category_id)
     return render_template('category.html', category=category)
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('errors.html'), 404
+
+
+@app.errorhandler(401)
+def not_found(error):
+    return redirect(url_for('login'))
+
+
+@app.template_filter('datetime_format')
+def datetime_format(value, format='%H:%M %x'):
+    return value.strftime(format)
 
 
 @app.context_processor
