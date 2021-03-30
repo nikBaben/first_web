@@ -43,3 +43,6 @@ class Post(db.Model):
     address = db.Column(db.String(80), nullable=False)
     phone_number = db.Column(db.Integer,nullable=False)
     img = db.Column(db.String(140),nullable=False)
+
+    author = db.relationship('Goga', backref=db.backref('articles', lazy=True))
+    category = db.relationship('Category', backref=db.backref('articles', lazy=True))

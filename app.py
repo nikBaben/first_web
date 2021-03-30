@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from models import db, Post, Goga,Category, Otziv
 from flask_migrate import Migrate
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from form import RegisterForm, LoginForm, ArticleForm,OtzivForm
+from form import RegisterForm, LoginForm, ArticleForm
 import locale
 
 
@@ -130,26 +130,7 @@ def inject_categories():
     return {'categories': Category.query.all()}
 
 
-@app.route('/add_otziv', methods=['GET', 'POST'])
-def otziv():
-    add_otziv = OtzivForm()
-    if add_otziv.validate_on_submit():
-        title = add_otziv.about.data
-        bode = add_otziv.lol.data
-        star = add_otziv.star.data
-        athor= current_user.name
-        otziv = Otziv(title=title,bode=bode,star=star, athor=athor)
-        db.session.add(otziv)
-        db.session.commit()
-        return redirect('/')
-    return render_template('add_otziv.html', form=add_otziv)
 
-
-@app.route('/home_id')
-def home():
-    status = Post.query.all()
-    status[current_user]
-    return render_template('home_id.html', status = status)
 
 
 if __name__ == '__main__':

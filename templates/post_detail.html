@@ -8,28 +8,21 @@
       </li>
     </ul>
   </div>
+    <div class="container">
+  <div class="row">
+     <div class="card-header">
+          <img src="{{ item.img }}" class="card-img-top" alt="...">
+      </div>
+  </div>
+    </div>
   <div class="card-body">
-    <h5 class="card-title">{{ item.title }}</h5>
+          <div class="card">
+ {{ item.title }}
+  </div>
     <p class="card-text">{{ item.body }}</p>
-      <p class="card-text">{{ item.address}}</p>
-      <div class="card">
-  <div class="card-header">
-    Quote
-  </div>
-    {% for el in lol %}
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>{{ el.athor }}</p>
-      <footer class="blockquote-footer">{{ el.athor }} <cite title="Source Title">{{ el.athor }}</cite></footer>
-    </blockquote>
-  </div>
-      {% endfor %}
-</div>
+      <p class="card-text">Адресс:{{ item.address}}</p>
+    <p class="card-text">Телефон:{{ item.address}}</p>
 
-        <li class="nav-item">
-              <a class="nav-link" href="/add_otziv">Регистрация</a>
-          </li>
-  </div>
 </div>
 {% endblock %}
 
