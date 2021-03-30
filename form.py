@@ -22,6 +22,8 @@ class ArticleForm(FlaskForm):
     address = StringField('адрес', validators=[DataRequired()])
     img = StringField('Картинка(ссылка)', validators=[DataRequired()])
     category_id = IntegerField('ID категории', validators=[Optional()], widget=TextInput('number'))
+    phone_number = StringField('номер телефона', validators=[DataRequired()])
+
 
 class OtzivForm(FlaskForm):
     about = StringField('Название товара', validators=[DataRequired()])

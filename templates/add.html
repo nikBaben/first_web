@@ -38,6 +38,10 @@
             <label class="form-label">{{ form.category_id.label }}</label>
             {{ form.category_id(class_="form-control") }}
         </div>
+        <div class="mb-3">
+            <label class="form-label">{{ form.phone_number.label }}</label>
+            {{ form.phone_number(class_="form-control") }}
+        </div>
         <button type="submit" class="btn btn-danger">Создать</button>
     </form>
 {% endblock %}

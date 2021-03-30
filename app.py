@@ -61,10 +61,11 @@ def create_article():
         title = article_form.title.data
         body = article_form.body.data
         address = article_form.address.data
+        img = article_form.img.data
         category_id = article_form.category_id.data
         author_id = current_user.name
-        post_id = article_form.post_id.data
-        article = Post(title=title, body=body,address=address,category_id=category_id,author_id=author_id, post_id=post_id )
+        phone_number = article_form.phone_number.data
+        article = Post(title=title, body=body,address=address,category_id=category_id,img=img,phone_number=phone_number,author_id=author_id)
         db.session.add(article)
         db.session.commit()
         return redirect('/')
